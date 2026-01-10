@@ -8,11 +8,11 @@
           <Logo :cur="!!cur" :reset="reset" />
           <div class="state">
             <Point :cur="!!cur" :max="max" :point="points" />
-            <p>{{pContent}}</p>
+            <p v-html="pContent"></p>
             <Number :number='cur ? clearLines : startLines' />
-            <p>{{level}}</p>
+            <p v-html="level"></p>
             <Number :number='cur?speedRun:speedStart' :length="1" />
-            <p>{{nextText}}</p>
+            <p v-html="nextText"></p>
             <Next :data="next" />
             <div class="bottom">
               <Music :data="music" />
@@ -23,6 +23,15 @@
         </div>
       </div>
     </div>
+    <!-- SVG Filter for Seal Roughness -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <defs>
+            <filter id="seal-roughness" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
     <Keyboard :filling='filling' />
     <Guide/>
   </div>

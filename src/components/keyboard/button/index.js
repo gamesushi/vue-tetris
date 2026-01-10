@@ -7,8 +7,6 @@ export default {
     'size',
     'top',
     'left',
-    'label',
-    'position',
-    'arrow'
+    'label'
   ]
 }

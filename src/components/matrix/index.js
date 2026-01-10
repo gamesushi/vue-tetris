@@ -19,14 +19,26 @@ export default {
     } else {
       matrix = this.getResult()
     }
-   
+
     return (
       <div class="matrix">
         {matrix.map((p, k1) =>
           <p>
-            {p.map((e, k2) =>
-              <b class={(e === 1 ? 'c' : '') + (e === 2 ? 'd' : '')} />
-            )}
+            {p.map((e, k2) => {
+              let className = ''
+              let text = '業'
+              if (e === 2) {
+                className = 'd'
+              } else if (typeof e === 'string' && e.endsWith('_active')) {
+                const type = e.split('_')[0]
+                className = 'active type-' + type
+                text = '德'
+              } else if (e) {
+                const type = e === 1 ? 'I' : e
+                className = 'c type-' + type
+              }
+              return <b class={className}>{text}</b>
+            })}
           </p>
         )}
       </div>
@@ -67,7 +79,7 @@ export default {
       if (clearLines) {
         const animateColor = this.animateColor
         clearLines.forEach(index => {
-          matrix[index]=[
+          matrix[index] = [
             animateColor,
             animateColor,
             animateColor,
@@ -79,23 +91,24 @@ export default {
             animateColor,
             animateColor
           ]
-         
+
         })
       } else if (shape) {
         shape.forEach((m, k1) =>
           m.forEach((n, k2) => {
             if (n && xy[0] + k1 >= 0) {
               // 竖坐标可以为负
-              let line = matrix[xy[0]+k1]
+              // 竖坐标可以为负
+              let line = matrix[xy[0] + k1]
               let color
-              if (line[xy[1] + k2] === 1 && !clearLines) {
+              if (line[xy[1] + k2] && !clearLines) {
                 // 矩阵与方块重合
                 color = 2
               } else {
-                color = 1
+                color = cur.type + '_active'
               }
-              line[xy[1] + k2]=color
-              matrix[xy[0] + k1]=line
+              line[xy[1] + k2] = color
+              matrix[xy[0] + k1] = line
             }
           })
         )
@@ -126,13 +139,13 @@ export default {
     },
     over(nextProps) {
       let overState = this.getResult(nextProps)
-      
+
       this.overState = [...overState]
       const exLine = index => {
         if (index <= 19) {
-          overState[19 - index]=fillLine
+          overState[19 - index] = fillLine
         } else if (index >= 20 && index <= 39) {
-          overState[index - 20]=blankLine
+          overState[index - 20] = blankLine
         } else {
           states.overEnd()
           return

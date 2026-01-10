@@ -1,59 +1,143 @@
+@font-face {
+    font-family: 'TiePing';
+    src: url('./assets/fonts/tieping.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DelaMaruGothic';
+    src: url('./assets/fonts/DelaMaruGothic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'XinHuo';
+    src: url('./assets/fonts/xinhuo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-    background: #009688;
+    background: #f2e6d8;
+    /* Rice White */
     padding: 0;
     margin: 0;
-    font: 20px/1 "HanHei SC", "PingHei", "PingFang SC", "STHeitiSC-Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font: 20px/1 'XinHuo', "HanHei SC", "PingHei", "PingFang SC", "STHeitiSC-Light", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
     overflow: hidden;
     cursor: default;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga', 'kern';
     -moz-font-feature-settings: 'liga', 'kern';
     direction: ltr;
     text-align: left;
+    color: #1a1a1a;
+    /* Ink Black Text */
 }
 
 :global {
     .r {
         float: right;
     }
+
     .l {
         float: left;
     }
+
     .clear {
         clear: both;
     }
+
     b {
         display: block;
-        width: 20px;
-        height: 20px;
-        padding: 2px;
-        border: 2px solid #879372;
-        margin: 0 2px 2px 0;
+        width: 22px;
+        height: 22px;
+        padding: 0;
+        margin: 0;
+        border: none;
         float: left;
+        background: transparent;
+        font-family: 'XinHuo', 'SiyinSong', sans-serif;
+        font-size: 20px;
+        line-height: 22px;
+        text-align: center;
+        color: transparent;
+        /* Default hidden */
+
         &:after {
-            content: '';
-            display: block;
-            width: 12px;
-            height: 12px;
-            background: #879372;
-            overflow: hidden;
+            display: none;
         }
+
         &.c {
-            border-color: #000;
-            &:after {
-                background: #000;
-            }
+            /* Landed Block (Karma) */
+            color: #4a4a4a;
+            /* Deep Grey */
+            font-weight: normal;
+            font-family: 'TiePing', sans-serif !important;
+            /* Force TiePing for Karma Blocks */
         }
-        &.d {
-            border-color: #560000;
-            &:after {
-                background: #560000;
+
+        &.active {
+            /* Falling Block (Virtue) */
+            /* color: #5d6d7e; Removed default */
+            font-weight: 900;
+            /* Bold */
+            font-family: 'TiePing', 'DelaMaruGothic', 'XinHuo', sans-serif !important;
+            /* Force TiePing for Virtue Blocks */
+
+
+            &.type-I {
+                color: #8FB2C9;
             }
+
+            /* Sky Blue */
+            &.type-L {
+                color: #F28E16;
+            }
+
+            /* Orange */
+            &.type-J {
+                color: #5E7987;
+            }
+
+            /* Indigo */
+            &.type-Z {
+                color: #C57063;
+            }
+
+            /* Ochre */
+            &.type-S {
+                color: #83A78D;
+            }
+
+            /* Green */
+            &.type-O {
+                color: #E8D098;
+            }
+
+            /* Yellow */
+            &.type-T {
+                color: #B0A4E3;
+            }
+
+            /* Purple */
+        }
+
+        /* Purple */
+
+        &.d {
+            /* Highlight/Clear Block */
+            color: #805050;
+            /* Keep Cinnabar for highlight */
         }
     }
+
     .bg {
-        background: url('//img.alicdn.com/tps/TB1qq7kNXXXXXacXFXXXXXXXXXX-400-186.png') no-repeat;
+        /* Removed background image */
+        background: none;
         overflow: hidden;
     }
 }
@@ -67,22 +151,26 @@ body {
 .app {
     width: 640px;
     padding-top: 42px;
-    box-shadow: 0 0 10px #fff inset;
-    border-radius: 20px;
+    box-shadow: none;
+    /* Removed shadow */
+    border-radius: 4px;
+    /* Slight radius */
     position: absolute;
     top: 50%;
     left: 50%;
     margin: -480px 0 0 -320px;
-    background: #efcc19;
+    background: #f2e6d8;
+    /* Rice White */
+
 }
 
 .rect {
-    width: 480px;
+    width: 540px;
     padding: 45px 0 35px;
-    border: #000 solid;
-    border-width: 0 10px 10px;
+
     margin: 0 auto;
     position: relative;
+
     &.drop {
         -webkit-transform: translateY(5px);
         transform: translateY(5px);
@@ -90,38 +178,174 @@ body {
 }
 
 .screen {
-    width: 390px;
+    width: 540px;
     height: 478px;
-    border: solid 5px;
-    border-color: #987f0f #fae36c #fae36c #987f0f;
+    border: none;
+    /* Removed border */
     margin: 0 auto;
     position: relative;
+
     .panel {
-        width: 380px;
+        width: 540px;
         height: 468px;
         margin: 0 auto;
-        background: #9ead86;
+        background: #f2e6d8;
+        /* Ensure screen is same color */
         padding: 8px;
-        border: 2px solid #494536;
+        border: none;
+        /* Thin inner border removed */
     }
 }
 
 .state {
-    width: 108px;
+    width: 135px;
+    /* Increased for wider Chinese numerals */
     position: absolute;
     top: 0;
-    right: 15px;
+    right: 50%;
+    margin-right: 120px;
+    text-align: right;
+
     p {
-        line-height: 47px;
+        line-height: 1.2;
         height: 57px;
         padding: 10px 0 0;
-        white-space: nowrap;
+        /* white-space: nowrap; removed for subtitles */
         clear: both;
+        color: #d32f2f;
+        /* Red Label Text */
+
+        small {
+            display: block;
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 2px;
+            font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            /* Keep English font for subtitles */
+            letter-spacing: 1px;
+        }
     }
+
     .bottom {
         position: absolute;
         width: 114px;
         top: 426px;
-        left: 0;
+        right: 0;
+    }
+}
+
+// Mobile Layout Adjustments (Scale 1.5x)
+.app.mobile {
+    .screen {
+        width: 100%; // Ensure it uses full width if needed, though 390px might be enough
+        height: auto; // Allow expansion
+        min-height: 850px; // Rough estimate: 440*1.5 + spacing + 42
+        overflow: visible;
+
+        .panel {
+            width: 100%;
+            height: auto;
+            min-height: 850px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+        }
+
+        .matrix {
+            transform: scale(1.5);
+            transform-origin: top center;
+            margin-bottom: 230px; // Compensate for the scale taking up more vertical space than flow layout sees
+            z-index: 10;
+        }
+    }
+
+    .state {
+        // Move from absolute right to static flow below matrix
+        position: static;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding-bottom: 40px;
+
+        p {
+            text-align: center;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .bottom {
+            position: static;
+            width: auto;
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+    }
+}
+
+// Mobile Layout Adjustments (Side-by-Side)
+.app.mobile {
+    .screen {
+        width: 100%;
+        height: auto;
+        min-height: 850px;
+        overflow: visible;
+
+        .panel {
+            width: 100%;
+            height: auto;
+            min-height: 850px;
+            display: block; // Reset flex from previous attempt if any, or ensures block context
+            position: relative;
+            padding-top: 20px;
+        }
+
+        .matrix {
+            // Game Board on Right
+            position: absolute;
+            top: 20px;
+            right: 15px; // Margin from right edge
+            transform: scale(1.5);
+            transform-origin: top right;
+            margin: 0; // Remove auto margins
+            z-index: 10;
+        }
+    }
+
+    .state {
+        // Info Panel on Left
+        position: absolute !important; // Override default absolute right
+        top: 20px;
+        right: auto; // Unset right
+        left: 10px; // Margin from left edge
+        width: 135px; // Keep original width basis
+
+        transform: scale(0.8); // Scale down slightly to fit
+        transform-origin: top left;
+
+        display: block; // Stack vertically as originally intended
+        margin: 0;
+        padding-bottom: 0;
+
+        p {
+            text-align: left; // Revert to left align or keep center? Left might be better in this narrow column
+            height: 57px;
+            margin-bottom: 0;
+        }
+
+        .bottom {
+            position: absolute;
+            top: 426px; // Keep original relative separation or adjust? 
+            // The originals were absolute within relative .state. 
+            // If .state scales, this scales with it.
+            // But we need to check if 'bottom' buttons (Music/Pause/Time) are part of this .state panel
+            // YES, .bottom is inside .state in HTML.
+            // So they will move with .state to the left.
+            // This clears the bottom center area for the main controls (Keyboard).
+        }
     }
 }

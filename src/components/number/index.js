@@ -1,4 +1,7 @@
-const formate = num => (num < 10 ? `0${num}`.split('') : `${num}`.split(''))
+const numMap = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+const toChinese = (num) => `${num}`.split('').map(n => isNaN(parseInt(n)) ? n : numMap[parseInt(n)]).join('')
+
+const formate = num => (num < 10 ? `0${num}` : `${num}`).split('').map(n => numMap[parseInt(n)])
 let NumberObj = {
   timeInterval: null,
   time_count: null
@@ -49,7 +52,7 @@ export default {
         this.data = t
         return
       }
-      const num = `${this.number}`.split('')
+      const num = toChinese(this.number).split('')
       for (let i = 0, len = this.length - num.length; i < len; i++) {
         num.unshift('n')
       }

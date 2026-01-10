@@ -26,7 +26,7 @@ export const speeds = [800, 650, 500, 370, 250, 160]
 
 export const delays = [50, 60, 70, 80, 90, 100]
 
-export const fillLine = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+export const fillLine = ['I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I', 'I']
 
 export const blankLine = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -65,7 +65,7 @@ export const lastRecord = (() => {
 
 export const maxPoint = 999999
 
-export const transform = (function() {
+export const transform = (function () {
   const trans = [
     'transform',
     'webkitTransform',

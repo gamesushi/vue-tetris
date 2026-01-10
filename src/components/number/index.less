@@ -1,49 +1,32 @@
+/* Define local or use global variables. Assuming SiyinSong is available */
+
 .number {
     height: 24px;
-    font-size: 14px;
+    font-family: 'XinHuo', 'SiyinSong', 'DelaMaruGothic', serif;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    color: #1a1a1a;
     float: right;
+
     span {
         float: left;
-        width: 14px;
+        width: 20px;
+        /* Increased spacing for Chinese numerals */
         height: 24px;
-    }
-    .s_0 {
-        background-position: -75px -25px;
-    }
-    .s_1 {
-        background-position: -89px -25px;
-    }
-    .s_2 {
-        background-position: -103px -25px;
-    }
-    .s_3 {
-        background-position: -117px -25px;
-    }
-    .s_4 {
-        background-position: -131px -25px;
-    }
-    .s_5 {
-        background-position: -145px -25px;
-    }
-    .s_6 {
-        background-position: -159px -25px;
-    }
-    .s_7 {
-        background-position: -173px -25px;
-    }
-    .s_8 {
-        background-position: -187px -25px;
-    }
-    .s_9 {
-        background-position: -201px -25px;
-    }
-    .s_n {
-        background-position: -215px -25px;
-    }
-    .s_d {
-        background-position: -243px -25px;
-    }
-    .s_d_c {
-        background-position: -229px -25px;
+        text-align: center;
+        display: block;
+
+        &.num-n {
+            color: transparent;
+        }
+
+        &.num-d,
+        &.num-d_c {
+            width: 10px;
+            font-family: sans-serif;
+            position: relative;
+            top: -2px;
+        }
     }
 }

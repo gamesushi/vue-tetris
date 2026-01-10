@@ -36,7 +36,7 @@ export default {
       shape.forEach((m, k1) => {
         m.forEach((n, k2) => {
           if (n) {
-            block[k1 + xy[type][0]][k2 + xy[type][1]] = 1
+            block[k1 + xy[type][0]][k2 + xy[type][1]] = type
           }
         })
       })

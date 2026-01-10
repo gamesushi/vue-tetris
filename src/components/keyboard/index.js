@@ -13,7 +13,7 @@ export default {
     $props: {
       deep: true,
       handler(nextProps) {
-        this.fillingNum = nextProps.filling + 20
+        this.fillingNum = nextProps.filling + 60
       }
     }
   },
@@ -21,14 +21,16 @@ export default {
     keyboard() {
       return this.$store.state.keyboard
     },
-    rotation: () => i18n.rotation[lan],
-    labelLeft: () => i18n.left[lan],
-    labelRight: () => i18n.right[lan],
-    labelDown: () => i18n.down[lan],
-    labelDropSpace: () => `${i18n.drop[lan]} (SPACE)`,
-    labelResetR: () => `${i18n.reset[lan]}(R)`,
-    labelSoundS: () => `${i18n.sound[lan]}(S)`,
-    labelPauseP: () => `${i18n.pause[lan]}(P)`
+    rotation: () => '旋',
+    labelLeft: () => '左',
+    labelRight: () => '右',
+    labelDown: () => '下',
+    labelDropSpace: () => '落',
+    labelResetR: () => '复',
+    labelSoundS: () => '音',
+    labelPauseP() {
+      return this.$store.state.pause ? '续' : '止'
+    }
   },
   mounted() {
     const touchEventCatch = {} // 对于手机操作, 触发了touchstart, 将作出记录, 不再触发后面的mouse事件
@@ -54,7 +56,7 @@ export default {
     document.addEventListener('gesturestart', (event) => {
       event.preventDefault();
     });
-    
+
     document.addEventListener(
       'mousedown',
       e => {

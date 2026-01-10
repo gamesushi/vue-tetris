@@ -5,7 +5,8 @@ import {
   blankLine,
   blankMatrix,
   clearPoints,
-  eachLines
+  eachLines,
+  blockType
 } from '../unit/const'
 import { music } from '../unit/music'
 
@@ -17,7 +18,7 @@ const getStartMatrix = startLines => {
     const line = []
     for (let i = 0; i < count; i++) {
       // 插入高亮
-      line.push(1)
+      line.push(blockType[Math.floor(Math.random() * blockType.length)])
     }
     for (let i = 0, len = 10 - count; i < len; i++) {
       // 在随机位置插入灰色
@@ -89,8 +90,8 @@ const states = {
             if (n && xy[0] + k1 >= 0) {
               // 竖坐标可以为负
               let line = matrix[xy[0] + k1]
-              line[xy[1] + k2]=1
-              matrix[xy[0] + k1]=line
+              line[xy[1] + k2] = cur.type
+              matrix[xy[0] + k1] = line
             }
           })
         )
@@ -168,7 +169,7 @@ const states = {
     lines.forEach(n => {
       newMatrix.splice(n, 1)
       // newMatrix = newMatrix.unshift(List(blankLine))
-       newMatrix.unshift(blankLine)
+      newMatrix.unshift(blankLine)
     })
     store.commit('matrix', newMatrix)
     store.commit('moveBlock', { type: state.next })

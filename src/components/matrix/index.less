@@ -1,9 +1,37 @@
 .matrix {
-  border: 2px solid #000;
-  padding: 3px 1px 1px 3px;
-  width: 228px;
+  border: 1px solid #1a1a1a;
+  padding: 0;
+  margin: 0 auto;
+  /* Tight fit */
+  width: 222px;
+  /* 22*10 + 2px border */
+  background: #eae8df;
+  /* Slightly darker Paper color for playfield */
+
+  /* Remove default margins/padding from p if any? p usually has margin. 
+     Global reset in app.less handles p margin:0. 
+  */
+
   p {
     width: 220px;
     height: 22px;
+    clear: both;
+    /* Ensure rows stack */
+  }
+
+  /* Grid lines for the graph paper effect */
+  b {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: normal;
+  }
+
+  /* Remove outer grid lines to avoid double borders with container */
+  p:last-child b {
+    border-bottom: none;
+  }
+
+  b:last-child {
+    border-right: none;
   }
 }

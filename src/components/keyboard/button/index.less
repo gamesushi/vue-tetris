@@ -1,105 +1,148 @@
-.background(@from, @to) {
-    background: (@from + @to)/2;
-    background: -webkit-gradient(linear, left top, left bottom, from(@from), to(@to));
-    background: -moz-linear-gradient(top, @from, @from); // IE9使用filter背景渐变, 但因为使用了borader-radius, 所以不兼容, IE9使用中和的背景色即可
-    //filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='@{from}', endColorstr='@{to}');
-}
+/* Define variables locally or use hardcoded as per Less scope, using the reference colors */
+@cinnabar-red: #B22222;
+@paper-white: #f2e6d8;
+/* Matching the app's existing rice white */
 
 .button {
     position: absolute;
     text-align: center;
-    color: #111;
-    position: absolute;
-    white-space: nowrap;
-    line-height: 1.6;
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    color: @cinnabar-red;
+    border: none;
+    line-height: 1;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-    &.s2 {
-        font-size: 16px;
-    }
-    span.position {
+    /* Common text styling for characters inside the stamp */
+    span {
         position: absolute;
-        top: 5px;
-        left: 102px;
-    }
-    i {
         display: block;
-        position: relative;
-        border: 1px solid #000;
-        border-radius: 50%;
-        &:before,
-        &:after {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 100%;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        line-height: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'XinHuo', 'SiyinSong', 'DelaMaruGothic', serif;
+        font-weight: 900;
+        /* Bold as per reference */
+        color: @paper-white;
+        /* YinKe: White text by default */
+        z-index: 10;
+        pointer-events: none;
+
+        /* Remove small text adjustments */
+        small {
+            display: none;
+        }
+
+        &.position {
             position: absolute;
             top: 0;
             left: 0;
-            border-radius: 50%;
-            box-shadow: 0 5px 10px rgba(255, 255, 255, .8) inset;
         }
-        &:after {
-            box-shadow: 0 -5px 10px rgba(0, 0, 0, .8) inset;
-        }
-        &.active {
-            &:before {
-                box-shadow: 0 -3px 6px rgba(255, 255, 255, .6) inset;
-            }
-            &:after {
-                box-shadow: 0 5px 5px rgba(0, 0, 0, .6) inset;
-            }
-        }
-        box-shadow: 0 3px 3px rgba(0, 0, 0, .2);
     }
-    &.blue i {
-        .background(#6e77ef, #4652f3);
-    }
-    &.green i {
-        .background(#4bc441, #0ec400);
-    }
-    &.red i {
-        .background(#dc3333, #de0000);
-    }
-    &.s0 i {
-        width: 160px;
-        height: 160px;
-    }
-    &.s1 i {
-        width: 100px;
-        height: 100px;
-    }
-    &.s2 i {
-        width: 52px;
-        height: 52px;
+
+    i {
+        display: block;
+        position: relative;
+        border: 4px solid @cinnabar-red;
+        /* Default thicker border */
+        border-radius: 6px;
+        background: @cinnabar-red;
+        /* YinKe: Red background by default */
+        transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.05s, color 0.05s;
+        box-sizing: border-box;
+
+        /* Apply the SVG Seal Filter */
+        filter: url(#seal-roughness);
+
         &:before,
         &:after {
-            box-shadow: 0px 3px 6px rgba(255, 255, 255, .8) inset;
+            display: none;
         }
-        &:after {
-            box-shadow: 0px -3px 6px rgba(0, 0, 0, .8) inset;
-        }
+
         &.active {
-            &:before {
-                box-shadow: 0px -1px 2px rgba(255, 255, 255, .6) inset;
-            }
-            &:after {
-                box-shadow: 0px 3px 3px rgba(0, 0, 0, .7) inset;
-            }
+            transform: scale(0.96);
+            /* Haptic visual feedback */
         }
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     }
-    &.s1 {
-        em {
-            display: block;
-            width: 0;
-            height: 0;
-            border: 8px solid;
-            border-color: transparent transparent #111;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin: -12px 0 0 -8px;
+
+    &.active {
+
+
+        i {
+            transform: scale(0.96);
         }
+    }
+
+    /* Remove color specific styles */
+    &.blue i,
+    &.green i,
+    &.red i {
+        background: @cinnabar-red;
+        border-color: @cinnabar-red;
+    }
+
+    @media (hover: hover) {
+        i:hover {
+            background: rgba(178, 34, 34, 0.05);
+        }
+    }
+
+    /* Adjust sizes according to the reference specs, but keeping our overlap fixes? 
+       Reference S0: 160px, S1: 100px.
+       We previously shrank them to 140/80 to avoid overlap.
+       I will stick to the SIZE that fits (140/80) but apply the STYLES (Border width) from reference where possible.
+    */
+
+    &.s0 {
+        i {
+            width: 140px;
+            height: 140px;
+            border-width: 5px;
+            /* Thicker for big Seal */
+            border-radius: 8px;
+        }
+
+        span {
+            font-size: 70px;
+            /* Larger font */
+            line-height: 140px;
+        }
+    }
+
+    &.s1 {
+        i {
+            width: 80px;
+            height: 80px;
+            border-width: 4px;
+            /* Standard seal thickness */
+            border-radius: 6px;
+        }
+
+        span {
+            font-size: 38px;
+            line-height: 80px;
+        }
+    }
+
+    &.s2 {
+        i {
+            width: 48px;
+            height: 48px;
+            border-width: 3px;
+            /* Thinner for small seal */
+            border-radius: 4px;
+        }
+
+        span {
+            font-size: 20px;
+            line-height: 48px;
+        }
+    }
+
+    em {
+        display: none !important;
     }
 }
