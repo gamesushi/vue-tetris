@@ -11,92 +11,106 @@ export const hasWebAudioAPI = {
   data: !!AudioContext && location.protocol.indexOf('http') !== -1
 }
 
+import moveUrl from 'url-loader!../assets/sound/move.wav'
+import rotateUrl from 'url-loader!../assets/sound/rotate.wav'
+import fallUrl from 'url-loader!../assets/sound/fall.wav'
+import clearUrl from 'url-loader!../assets/sound/clear.wav'
+
 export const music = {}
-;(() => {
-  if (!hasWebAudioAPI.data) {
-    return
-  }
-  const url = './static/music.mp3'
-  const context = new AudioContext()
-  const req = new XMLHttpRequest()
-  req.open('GET', url, true)
-  req.responseType = 'arraybuffer'
+  ; (() => {
+    if (!hasWebAudioAPI.data) {
+      return
+    }
+    const context = new AudioContext()
 
-  req.onload = () => {
-    context.decodeAudioData(
-      req.response,
-      buf => {
-        // 将拿到的audio解码转为buffer
-        const getSource = () => {
-          // 创建source源。
-          const source = context.createBufferSource()
-          source.buffer = buf
+    const loadAudio = (url) => {
+      return new Promise((resolve, reject) => {
+        const req = new XMLHttpRequest()
+        req.open('GET', url, true)
+        req.responseType = 'arraybuffer'
+        req.onload = () => {
+          context.decodeAudioData(
+            req.response,
+            buf => resolve(buf),
+            error => reject(error)
+          )
+        }
+        req.onerror = () => reject(new Error(`Network error loading ${url}`))
+        req.send()
+      })
+    }
+
+    Promise.all([
+      loadAudio('./static/music.mp3'),
+      loadAudio(moveUrl),
+      loadAudio(rotateUrl),
+      loadAudio(fallUrl),
+      loadAudio(clearUrl)
+    ]).then(([musicBuf, moveBuf, rotateBuf, fallBuf, clearBuf]) => {
+      const getSource = (buf, volume = 1.0) => {
+        const source = context.createBufferSource()
+        source.buffer = buf
+        if (volume !== 1.0) {
+          const gainNode = context.createGain()
+          gainNode.gain.value = volume
+          source.connect(gainNode)
+          gainNode.connect(context.destination)
+        } else {
           source.connect(context.destination)
-          return source
         }
-
-        music.killStart = () => {
-          // 游戏开始的音乐只播放一次
-          music.start = () => {}
-        }
-
-        music.start = () => {
-          // 游戏开始
-          music.killStart()
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 3.7202, 3.6224)
-        }
-
-        music.clear = () => {
-          // 消除方块
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 0, 0.7675)
-        }
-
-        music.fall = () => {
-          // 立即下落
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 1.2558, 0.3546)
-        }
-
-        music.gameover = () => {
-          // 游戏结束
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 8.1276, 1.1437)
-        }
-
-        music.rotate = () => {
-          // 旋转
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 2.2471, 0.0807)
-        }
-
-        music.move = () => {
-          // 移动
-          if (!store.state.music) {
-            return
-          }
-          getSource().start(0, 2.9088, 0.1437)
-        }
-      },
-      error => {
-        if (window.console && window.console.error) {
-          window.console.error(`音频: ${url} 读取错误`, error)
-          hasWebAudioAPI.data = false
-        }
+        return source
       }
-    )
-  }
 
-  req.send()
-})()
+      music.killStart = () => {
+        music.start = () => { }
+      }
+
+      music.start = () => {
+        music.killStart()
+        if (!store.state.music) {
+          return
+        }
+        getSource(musicBuf).start(0, 3.7202, 3.6224)
+      }
+
+      music.clear = () => {
+        if (!store.state.music) {
+          return
+        }
+        getSource(clearBuf, 0.5).start(0)
+      }
+
+      music.fall = () => {
+        if (!store.state.music) {
+          return
+        }
+        getSource(fallBuf, 0.5).start(0)
+      }
+
+      music.gameover = () => {
+        if (!store.state.music) {
+          return
+        }
+        getSource(musicBuf).start(0, 8.1276, 1.1437)
+      }
+
+      music.rotate = () => {
+        if (!store.state.music) {
+          return
+        }
+        getSource(rotateBuf, 0.5).start(0)
+      }
+
+      music.move = () => {
+        if (!store.state.music) {
+          return
+        }
+        getSource(moveBuf).start(0)
+      }
+    }).catch(error => {
+      if (window.console && window.console.error) {
+        window.console.error(`音频读取错误`, error)
+        hasWebAudioAPI.data = false
+      }
+    })
+  })()
