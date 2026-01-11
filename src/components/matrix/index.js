@@ -1,4 +1,4 @@
-import { isClear } from '../../unit/'
+import { isClear, want } from '../../unit/'
 import { fillLine, blankLine } from '../../unit/const'
 import states from '../../control/states'
 const t = setTimeout
@@ -32,6 +32,10 @@ export default {
               } else if (typeof e === 'string' && e.endsWith('_active')) {
                 const type = e.split('_')[0]
                 className = 'active type-' + type
+                text = '德'
+              } else if (typeof e === 'string' && e.endsWith('_ghost')) {
+                const type = e.split('_')[0]
+                className = 'ghost type-' + type
                 text = '德'
               } else if (e) {
                 const type = e === 1 ? 'I' : e
@@ -94,6 +98,28 @@ export default {
 
         })
       } else if (shape) {
+        // Ghost Block Calculation
+        let ghostY = xy[0]
+        while (want({ shape, xy: [ghostY + 1, xy[1]] }, props.propMatrix)) {
+          ghostY++
+        }
+
+        // Render Ghost Block
+        // Only render if ghost is below the current block position
+        if (ghostY > xy[0]) {
+          shape.forEach((m, k1) =>
+            m.forEach((n, k2) => {
+              if (n && ghostY + k1 >= 0) {
+                let line = matrix[ghostY + k1]
+                if (line && !line[xy[1] + k2]) {
+                  line[xy[1] + k2] = cur.type + '_ghost'
+                  matrix[ghostY + k1] = line
+                }
+              }
+            })
+          )
+        }
+
         shape.forEach((m, k1) =>
           m.forEach((n, k2) => {
             if (n && xy[0] + k1 >= 0) {
@@ -101,7 +127,9 @@ export default {
               // 竖坐标可以为负
               let line = matrix[xy[0] + k1]
               let color
-              if (line[xy[1] + k2] && !clearLines) {
+              // Check for overlap, ignoring ghost cells
+              let isGhost = typeof line[xy[1] + k2] === 'string' && line[xy[1] + k2].endsWith('_ghost')
+              if (line[xy[1] + k2] && !isGhost && !clearLines) {
                 // 矩阵与方块重合
                 color = 2
               } else {
@@ -116,26 +144,10 @@ export default {
       return matrix
     },
     clearAnimate() {
-      const anima = callback => {
-        t(() => {
-          this.animateColor = 0
-          t(() => {
-            this.animateColor = 2
-            if (typeof callback === 'function') {
-              callback()
-            }
-          }, 100)
-        }, 100)
-      }
-      anima(() => {
-        anima(() => {
-          anima(() => {
-            t(() => {
-              states.clearLines(this.propMatrix, this.clearLines)
-            }, 100)
-          })
-        })
-      })
+      this.animateColor = 2
+      t(() => {
+        states.clearLines(this.propMatrix, this.clearLines)
+      }, 600)
     },
     over(nextProps) {
       let overState = this.getResult(nextProps)

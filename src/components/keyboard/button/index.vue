@@ -1,5 +1,5 @@
 <template>
-  <div class="button" :class="color+' '+size" :style="'top:'+top+'px;'+'left:'+left+'px'">
+  <div class="button" :class="color+' '+size">
     <i :class="{'active':active}" />
     <span>{{ label }}</span>
   </div>

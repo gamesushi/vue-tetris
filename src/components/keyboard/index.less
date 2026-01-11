@@ -1,6 +1,31 @@
 .keyboard {
-    width: 580px;
-    height: 330px;
+    width: 100%;
+    max-width: 900px;
     margin: 20px auto 0;
-    position: relative;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    .button-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-wrap: nowrap;
+
+        &.secondary-row {
+            gap: 12px;
+        }
+
+        &.primary-row {
+            gap: 8px;
+
+            .button:nth-child(2) {
+                margin-right: 35px;
+            }
+        }
+    }
 }

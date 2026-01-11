@@ -70,14 +70,14 @@ export default {
         let scale
         let css = {}
         if (ratio < 1.5) {
-          scale = h / 960
+          scale = h / 1350
         } else {
-          scale = w / 640
-          filling = (h - 960 * scale) / scale / 3
+          scale = w / 750
+          filling = (h - 1350 * scale) / scale / 3
           css = {
             'padding-top': Math.floor(filling) + 42 + 'px',
-            'padding-bottom': Math.floor(filling) + 'px',
-            'margin-top': Math.floor(-480 - filling * 1.5) + 'px'
+            'padding-bottom': '50px',
+            'margin-top': Math.floor(-675 - (filling * 1.5 - 50)) + 'px'
           }
         }
         css[transform] = `scale(${scale})`

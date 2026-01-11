@@ -3,8 +3,8 @@
   padding: 0;
   margin: 0 auto;
   /* Tight fit */
-  width: 222px;
-  /* 22*10 + 2px border */
+  width: 402px;
+  /* 40*10 + 2px border */
   background: #eae8df;
   /* Slightly darker Paper color for playfield */
 
@@ -13,14 +13,18 @@
   */
 
   p {
-    width: 220px;
-    height: 22px;
+    width: 400px;
+    height: 40px;
     clear: both;
     /* Ensure rows stack */
   }
 
   /* Grid lines for the graph paper effect */
   b {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 38px !important;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     font-weight: normal;

@@ -17,7 +17,6 @@
             <div class="bottom">
               <Music :data="music" />
               <Pause :data="pause" />
-              <Number :propTime="true" />
             </div>
           </div>
         </div>

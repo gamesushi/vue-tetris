@@ -108,7 +108,7 @@ body {
 
             /* Green */
             &.type-O {
-                color: #E8D098;
+                color: #1a6840;
             }
 
             /* Yellow */
@@ -119,6 +119,40 @@ body {
             /* Purple */
         }
 
+        &.ghost {
+            opacity: 0.3;
+            font-weight: normal;
+            font-family: 'TiePing', 'XinHuo', sans-serif !important;
+
+            &.type-I {
+                color: #8FB2C9;
+            }
+
+            &.type-L {
+                color: #F28E16;
+            }
+
+            &.type-J {
+                color: #5E7987;
+            }
+
+            &.type-Z {
+                color: #C57063;
+            }
+
+            &.type-S {
+                color: #83A78D;
+            }
+
+            &.type-O {
+                color: #1a6840;
+            }
+
+            &.type-T {
+                color: #B0A4E3;
+            }
+        }
+
         /* Purple */
 
         &.d {
@@ -127,6 +161,45 @@ body {
             /* Keep Cinnabar for highlight */
             font-family: 'TiePing', sans-serif !important;
             /* Force TiePing for Flashing Blocks */
+            animation: shatter-right 600ms ease-out forwards;
+        }
+
+        &:nth-child(odd).d {
+            animation-name: shatter-left;
+        }
+    }
+
+    @keyframes shatter-left {
+        0% {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+        }
+
+        20% {
+            transform: scale(1.1) rotate(-10deg);
+            opacity: 0.9;
+        }
+
+        100% {
+            transform: scale(0) rotate(-60deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes shatter-right {
+        0% {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+        }
+
+        20% {
+            transform: scale(1.1) rotate(10deg);
+            opacity: 0.9;
+        }
+
+        100% {
+            transform: scale(0) rotate(60deg);
+            opacity: 0;
         }
     }
 
@@ -144,7 +217,7 @@ body {
 }
 
 .app {
-    width: 640px;
+    width: 750px;
     padding-top: 42px;
     box-shadow: none;
     /* Removed shadow */
@@ -153,7 +226,7 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -480px 0 0 -320px;
+    margin: -675px 0 0 -375px;
     background: #f2e6d8;
     /* Rice White */
 
@@ -174,7 +247,7 @@ body {
 
 .screen {
     width: 540px;
-    height: 478px;
+    height: 840px;
     border: none;
     /* Removed border */
     margin: 0 auto;
@@ -182,7 +255,7 @@ body {
 
     .panel {
         width: 540px;
-        height: 468px;
+        height: 830px;
         margin: 0 auto;
         background: #f2e6d8;
         /* Ensure screen is same color */
@@ -198,17 +271,19 @@ body {
     position: absolute;
     top: 0;
     right: 50%;
-    margin-right: 120px;
+    margin-right: 220px;
     text-align: right;
 
     p {
         line-height: 1.2;
-        height: 57px;
-        padding: 10px 0 0;
+        height: 85px;
+        padding: 20px 0 0;
         /* white-space: nowrap; removed for subtitles */
         clear: both;
         color: #d32f2f;
         /* Red Label Text */
+        font-size: 38px;
+        /* Match Block Font Size */
 
         small {
             display: block;
