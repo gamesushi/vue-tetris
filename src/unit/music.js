@@ -15,6 +15,8 @@ import moveUrl from 'url-loader!../assets/sound/move.wav'
 import rotateUrl from 'url-loader!../assets/sound/rotate.wav'
 import fallUrl from 'url-loader!../assets/sound/fall.wav'
 import clearUrl from 'url-loader!../assets/sound/clear.wav'
+import gameoverUrl from 'url-loader!../assets/sound/gameover.wav'
+import gamestartUrl from 'url-loader!../assets/sound/gamestart.wav'
 
 export const music = {}
   ; (() => {
@@ -45,8 +47,10 @@ export const music = {}
       loadAudio(moveUrl),
       loadAudio(rotateUrl),
       loadAudio(fallUrl),
-      loadAudio(clearUrl)
-    ]).then(([musicBuf, moveBuf, rotateBuf, fallBuf, clearBuf]) => {
+      loadAudio(clearUrl),
+      loadAudio(gameoverUrl),
+      loadAudio(gamestartUrl)
+    ]).then(([musicBuf, moveBuf, rotateBuf, fallBuf, clearBuf, gameoverBuf, gamestartBuf]) => {
       const getSource = (buf, volume = 1.0) => {
         const source = context.createBufferSource()
         source.buffer = buf
@@ -70,7 +74,7 @@ export const music = {}
         if (!store.state.music) {
           return
         }
-        getSource(musicBuf).start(0, 3.7202, 3.6224)
+        getSource(gamestartBuf, 0.5).start(0)
       }
 
       music.clear = () => {
@@ -91,7 +95,7 @@ export const music = {}
         if (!store.state.music) {
           return
         }
-        getSource(musicBuf).start(0, 8.1276, 1.1437)
+        getSource(gameoverBuf, 0.5).start(0)
       }
 
       music.rotate = () => {

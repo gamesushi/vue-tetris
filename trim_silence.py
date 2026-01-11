@@ -60,3 +60,5 @@ if __name__ == "__main__":
     trim_silence(os.path.join(base_dir, "rotate.wav"))
     trim_silence(os.path.join(base_dir, "fall.wav"))
     trim_silence(os.path.join(base_dir, "clear.wav"))
+    trim_silence(os.path.join(base_dir, "gameover.wav"))
+    trim_silence(os.path.join(base_dir, "gamestart.wav"))
