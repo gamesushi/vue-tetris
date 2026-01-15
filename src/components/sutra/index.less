@@ -1,0 +1,82 @@
+@import '../../loader.less';
+
+.sutra-container {
+    /* PC Styles */
+    position: absolute;
+    /* 
+       Matrix is inside a 540px centered Rect in a 750px App.
+       (750 - 540) / 2 = 105px margin.
+       Matrix Right Edge = 105 + 540 = 645px.
+       Set Left to 650px to ensure it starts right after Matrix without overlap.
+    */
+    left: 655px;
+    right: auto;
+    /* Clear right property */
+    top: 87px;
+    height: 540px;
+    /* Reduced height to stay above Guide */
+    width: 400px;
+    overflow: hidden;
+    z-index: 1000;
+    pointer-events: none;
+
+    .sutra-content {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        font-family: 'XinHuo', sans-serif;
+        font-size: 24px;
+        color: #333333;
+        line-height: 1.5;
+        letter-spacing: 4px;
+
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+
+        white-space: normal;
+
+        transition: transform 0.5s ease-out;
+
+        .sutra-text-flow {
+            display: inline;
+        }
+
+        .sutra-title {
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .active-char {
+            display: inline-block;
+            vertical-align: top;
+            width: 1em;
+            text-align: center;
+            overflow: hidden;
+        }
+    }
+}
+
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .sutra-container {
+        left: auto;
+        /* Reset left */
+        right: 0;
+        top: 127px;
+        height: 660px;
+        transform: none;
+        width: 170px;
+
+        .sutra-content {
+            font-size: 36px;
+            line-height: 1.5;
+
+            .active-char {
+                width: 1em;
+            }
+        }
+    }
+}

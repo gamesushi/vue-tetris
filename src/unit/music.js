@@ -11,12 +11,13 @@ export const hasWebAudioAPI = {
   data: !!AudioContext && location.protocol.indexOf('http') !== -1
 }
 
-import moveUrl from 'url-loader!../assets/sound/move.wav'
-import rotateUrl from 'url-loader!../assets/sound/rotate.wav'
-import fallUrl from 'url-loader!../assets/sound/fall.wav'
-import clearUrl from 'url-loader!../assets/sound/clear.wav'
-import gameoverUrl from 'url-loader!../assets/sound/gameover.wav'
-import gamestartUrl from 'url-loader!../assets/sound/gamestart.wav'
+import musicUrl from '../assets/sound/music.mp3'
+import moveUrl from '../assets/sound/move.wav'
+import rotateUrl from '../assets/sound/rotate.wav'
+import fallUrl from '../assets/sound/fall.wav'
+import clearUrl from '../assets/sound/clear.wav'
+import gameoverUrl from '../assets/sound/gameover.wav'
+import gamestartUrl from '../assets/sound/gamestart.wav'
 
 export const music = {}
   ; (() => {
@@ -43,7 +44,7 @@ export const music = {}
     }
 
     Promise.all([
-      loadAudio('./static/music.mp3'),
+      loadAudio(musicUrl),
       loadAudio(moveUrl),
       loadAudio(rotateUrl),
       loadAudio(fallUrl),

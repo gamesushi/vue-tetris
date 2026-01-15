@@ -13,30 +13,6 @@
       "fr": "T E T R I S",
       "fa": "خانه سازی"
     },
-    "github": {
-      "cn": "GitHub",
-      "en": "GitHub",
-      "fr": "GitHub",
-      "fa": "گیت‌هاب"
-    },
-    "linkTitle": {
-      "cn": "查看源代码",
-      "en": "View Source",
-      "fr": "Afficher la source des données",
-      "fa": "مشاهده سورس پروژه"
-    },
-    "QRCode": {
-      "cn": "二维码",
-      "en": "QR code",
-      "fr": "QR code",
-      "fa": "کیوآر کد"
-    },
-    "QRNotice": {
-      "cn": "扫一扫用手机玩",
-      "en": "Scan for mobile",
-      "fr": "Numérisez le code QR pour jouer avec un téléphone mobile",
-      "fa": "اسکن کیوآر کد برای بازی در تلفن همراه"
-    },
     "titleCenter": {
       "cn": "積德消業",
       "en": "積德消業",
@@ -50,14 +26,14 @@
       "fa": "امتیاز"
     },
     "highestScore": {
-      "cn": "巅峰<small>PEAK</small>",
-      "en": "巅峰",
+      "cn": "頂点<small>PEAK</small>",
+      "en": "頂点",
       "fr": "Max",
       "fa": "حداکثر"
     },
     "lastRound": {
-      "cn": "前缘<small>LAST</small>",
-      "en": "前缘",
+      "cn": "前世<small>LAST</small>",
+      "en": "前世",
       "fr": "Dernier Tour",
       "fa": "آخرین دور"
     },

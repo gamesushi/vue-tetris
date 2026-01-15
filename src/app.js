@@ -8,11 +8,26 @@ import Point from './components/point/index.vue'
 import Keyboard from './components/keyboard/index.vue'
 import Logo from './components/logo/index.vue'
 import Matrix from './components/matrix/index.vue'
+import Sutra from './components/sutra/index.vue'
 import { mapState } from 'vuex'
 import { transform, lastRecord, speeds, i18n, lan } from './unit/const'
-import { visibilityChangeEvent, isFocus } from './unit/'
+import { visibilityChangeEvent, isFocus, isMobile } from './unit/'
 import states from './control/states'
 export default {
+  watch: {
+    isMobile: {
+      handler(val) {
+        if (val) {
+          document.body.classList.add('mobile-mode')
+          document.body.classList.remove('pc-mode')
+        } else {
+          document.body.classList.remove('mobile-mode')
+          document.body.classList.add('pc-mode')
+        }
+      },
+      immediate: true
+    }
+  },
   mounted() {
     this.render()
     window.addEventListener('resize', this.resize.bind(this), true)
@@ -22,7 +37,8 @@ export default {
       size: {},
       w: document.documentElement.clientWidth,
       h: document.documentElement.clientHeight,
-      filling: ''
+      filling: '',
+      isMobile: isMobile()
     }
   },
   components: {
@@ -35,7 +51,8 @@ export default {
     Point,
     Logo,
     Keyboard,
-    Matrix
+    Matrix,
+    Sutra
   },
   computed: {
     pContent() {
@@ -69,15 +86,19 @@ export default {
         const ratio = h / w
         let scale
         let css = {}
+        const baseHeight = this.isMobile ? 1350 : 962
         if (ratio < 1.5) {
-          scale = h / 1350
+          scale = h / baseHeight
+          css = {
+            'margin-top': Math.floor(-baseHeight / 2) + 'px'
+          }
         } else {
           scale = w / 750
-          filling = (h - 1350 * scale) / scale / 3
+          filling = (h - baseHeight * scale) / scale / 3
           css = {
             'padding-top': Math.floor(filling) + 42 + 'px',
             'padding-bottom': '50px',
-            'margin-top': Math.floor(-675 - (filling * 1.5 - 50)) + 'px'
+            'margin-top': Math.floor(-baseHeight / 2 - (filling * 1.5 - 50)) + 'px'
           }
         }
         css[transform] = `scale(${scale})`
@@ -90,6 +111,7 @@ export default {
     resize() {
       this.w = document.documentElement.clientWidth
       this.h = document.documentElement.clientHeight
+      this.isMobile = isMobile()
       this.render()
     },
     start() {

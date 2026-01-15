@@ -1,0 +1,52 @@
+// Mobile Background Optimization
+body.mobile-mode {
+    background: url('./assets/images/bg_common_mobile_9x16_ink.webp') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    // Make app container transparent
+    .app {
+        background: transparent !important;
+        box-shadow: none;
+    }
+
+    // Make inner containers transparent to show the background
+    .rect {
+        background: transparent;
+    }
+
+    .screen {
+        background: transparent;
+        border: none;
+    }
+
+    .screen .panel {
+        background: transparent !important;
+    }
+}
+
+// PC Background Optimization
+body.pc-mode {
+    background: url('./assets/images/bg_common_pc_16x9_ink.webp') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+
+    // Make app container transparent
+    .app {
+        background: transparent !important;
+        box-shadow: none;
+    }
+
+    .rect {
+        background: transparent;
+    }
+
+    .screen {
+        background: transparent;
+        border: none;
+    }
+
+    .screen .panel {
+        background: transparent !important;
+    }
+}

@@ -67,6 +67,9 @@ export default {
       true
     )
     Object.keys(todo).forEach(key => {
+      if (!this.$refs[`dom_${key}`]) {
+        return
+      }
       this.$refs[`dom_${key}`].$el.addEventListener(
         'mousedown',
         () => {

@@ -6,6 +6,7 @@ import space from './space'
 import s from './s'
 import r from './r'
 import p from './p'
+import x from './x'
 
 export default {
   left,
@@ -15,5 +16,6 @@ export default {
   space,
   r,
   p,
-  s
+  s,
+  x
 }

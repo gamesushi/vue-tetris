@@ -1,32 +1,54 @@
 <template>
   <div v-show="!isMobile">
     <div class="guide right">
-      <div class="up">
-        <em style="transform:translate(0,-3px) scale(1,2)" />
-      </div>
-      <div class="left">
-        <em style="transform:translate(-7px,3px) rotate(-90deg) scale(1,2)" />
-      </div>
-      <div class="down">
-        <em style="transform: translate(0,9px) rotate(180deg) scale(1,2)" />
-      </div>
-      <div class="right">
-        <em style="transform: translate(7px,3px)rotate(90deg) scale(1,2)" />
+      <div class="msg">
+        <div class="control-section">
+          <div class="arrow-cluster">
+            <div class="arrow-row top">
+              <div class="key-wrapper">
+                <div class="key-cap">↑</div>
+                <span class="key-label">旋</span>
+              </div>
+            </div>
+            <div class="arrow-row bottom">
+              <div class="key-wrapper">
+                <div class="key-cap">←</div>
+                <span class="key-label">左</span>
+              </div>
+              <div class="key-wrapper">
+                <div class="key-cap">↓</div>
+                <span class="key-label">下</span>
+              </div>
+              <div class="key-wrapper">
+                <div class="key-cap">→</div>
+                <span class="key-label">右</span>
+              </div>
+            </div>
+          </div>
+          <div class="action-cluster">
+            <div class="key-wrapper space-wrapper">
+              <div class="key-cap space">Space</div>
+              <span class="key-label">落</span>
+            </div>
+          </div>
+          <div class="func-cluster">
+            <div class="key-wrapper">
+              <div class="key-cap">S</div>
+              <span class="key-label">音</span>
+            </div>
+            <div class="key-wrapper">
+              <div class="key-cap">P</div>
+              <span class="key-label">止</span>
+            </div>
+            <div class="key-wrapper">
+              <div class="key-cap">R</div>
+              <span class="key-label">复</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="guide left">
-      <p>
-        <a href="https://github.com/Binaryify/vue-tetris" rel="noopener noreferrer" target="_blank" v-bind="{title:linkTitle}">{{github}}:</a>
-        <br />
-        <iframe src="https://ghbtns.com/github-btn.html?user=Binaryify&repo=vue-tetris&type=star&count=true" frameBorder="0" scrolling="0" width="170px" height="20px" style="transform: scale(1.68);transform-origin: center left" />
-        <br />
-        <iframe src="https://ghbtns.com/github-btn.html?user=Binaryify&repo=vue-tetris&type=fork&count=true" frameBorder="0" scrolling="0" width="170px" height="20px" style="transform: scale(1.68);transform-origin: center left" />
-      </p>
-      <div class="space">SPACE</div>
-    </div>
-    <div class="guide qr">
-      <img :src="QRSrc" v-bind="{title:QRTitle,alt:QRCode}" />
-    </div>
+
   </div>
 </template>
 

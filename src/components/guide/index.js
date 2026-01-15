@@ -1,20 +1,19 @@
 import { i18n, lan } from '../../unit/const'
 import { isMobile } from '../../unit'
+import Vbutton from '../keyboard/button/index.vue'
+
 export default {
   name: 'Guide',
+  components: {
+    Vbutton
+  },
   data() {
     return {
       isMobile: isMobile()
     }
   },
   computed: {
-    linkTitle: () => i18n.linkTitle[lan],
-    github: () => i18n.github[lan],
-    QRCode: () => i18n.QRCode[lan],
-    QRTitle: () => i18n.QRNotice[lan],
-    QRSrc: () =>
-      window.location.protocol +
-      '//raw.githubusercontent.com/Binaryify/vue-tetris/master/static/qr.jpeg'
+
   },
   mounted() {
     window.addEventListener('resize', this.resize.bind(this), true)

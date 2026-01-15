@@ -12,71 +12,40 @@
     text-align: center;
     line-height: 1;
     white-space: nowrap;
+
     &.right {
         right: auto;
         bottom: 5%;
     }
-    &.left {
-        left: auto;
-        bottom: 5%;
-    }
-    p {
-        text-align: left;
-        margin-bottom: 350px;
-        opacity: .5;
-        iframe {
-            margin-top: 20px;
-        }
-    }
-    a {
-        color: #005850;
-        font-size: 30px;
-        position: relative;
-        z-index: 1;
-        cursor: alias;
-        text-decoration: none;
-    }
-    &.qr {
-        left: auto;
-        top: 5%;
-        width: 190px;
-        height: 190px;
-        opacity: .45;
-        padding: 0 0 40px 40px;
-        text-align: right;
-        &:hover {
-            img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-        img {
-            width: 38px;
-            height: 38px;
-        }
-    }
+
+
+
     &>div {
         width: 100px;
         height: 54px;
-        background: /*#404040*/
-        #364d4b;
+        background:
+            /*#404040*/
+            #364d4b;
         display: inline-block;
         border-radius: 4px;
         position: relative;
         color: #acc3c1;
         font-size: 16px;
+
         em {
             display: block;
             width: 0;
             height: 0;
             border: 6px solid;
-            border-color: transparent transparent/*#ccc*/
-            #acc3c1;
+            border-color: transparent transparent
+                /*#ccc*/
+                #acc3c1;
             position: absolute;
             top: 50%;
             left: 50%;
             margin: -9px 0 0 -6px;
         }
+
         &:before,
         &:after {
             content: '';
@@ -89,18 +58,22 @@
             border-radius: 4px;
             box-shadow: 0 5px 10px rgba(255, 255, 255, .15) inset;
         }
+
         &:before {
             box-shadow: 0 -5px 10px rgba(0, 0, 0, .15) inset;
         }
     }
+
     .up {
         height: 60px;
         display: block;
         margin: 0 auto 2px;
     }
+
     .down {
         margin: 0 10px;
     }
+
     .space {
         left: auto;
         bottom: 5%;
@@ -108,5 +81,94 @@
         width: 400px;
         line-height: 80px;
         letter-spacing: 2px;
+    }
+
+    .msg {
+        // Reset styles from &>div
+        width: auto !important;
+        height: auto !important;
+        background: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        color: #1a1a1a !important;
+
+        &:before,
+        &:after {
+            display: none !important;
+        }
+
+        text-align: center;
+        font-family: 'XinHuo',
+        sans-serif;
+
+        .control-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .arrow-cluster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .arrow-row {
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+
+                &.bottom {
+                    margin-top: 5px;
+                }
+            }
+        }
+
+        .action-cluster {
+            margin-top: 5px;
+        }
+
+        .func-cluster {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .key-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .key-cap {
+                display: inline-block;
+                min-width: 40px;
+                height: 40px;
+                background: #222;
+                color: #eee;
+                border-radius: 6px;
+                text-align: center;
+                line-height: 36px;
+                border-bottom: 4px solid #000;
+                font-family: Arial, sans-serif;
+                font-weight: bold;
+                font-size: 18px;
+                box-sizing: border-box;
+
+                &.space {
+                    width: 130px;
+                    font-size: 14px;
+                }
+            }
+
+            .key-label {
+                margin-top: 4px;
+                font-size: 12px;
+                color: #555;
+                font-weight: bold;
+            }
+        }
     }
 }

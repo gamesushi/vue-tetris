@@ -1,5 +1,5 @@
 <template>
-  <div class="app" :style="size">
+  <div class="app" :class="{ 'mobile-bg': isMobile }" :style="size">
     <div class="rect" :class="drop?'drop':''">
       <Decorate/>
       <div class="screen">
@@ -31,14 +31,16 @@
             </filter>
         </defs>
     </svg>
-    <Keyboard :filling='filling' />
+    <Keyboard :filling='filling' v-if="isMobile" />
     <Guide/>
+    <Sutra />
   </div>
 </template>
 
 <style lang="less">
 @import './app.less';
 @import './loader.less';
+@import './app_mobile_bg.less';
 </style>
 
 <script src="./app.js"></script>
