@@ -13,7 +13,7 @@ export default {
     $props: {
       deep: true,
       handler(nextProps) {
-        this.fillingNum = nextProps.filling + 60
+        this.fillingNum = nextProps.filling
       }
     }
   },

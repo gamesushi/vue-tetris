@@ -21,10 +21,28 @@
         }
 
         &.primary-row {
-            gap: 8px;
+            padding: 0 10%;
+            justify-content: space-between;
 
-            .button:nth-child(2) {
-                margin-right: 35px;
+            .keyboard-dpad {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .dpad-top {
+                    display: flex;
+                    gap: 40px;
+                }
+
+                .dpad-down {
+                    margin-top: 10px;
+                }
+            }
+
+            .keyboard-action {
+                display: flex;
+                gap: 15px;
+                padding-top: 10px;
             }
         }
     }

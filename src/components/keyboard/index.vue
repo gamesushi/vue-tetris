@@ -30,41 +30,48 @@
 
         <!-- Bottom Row: Primary Controls -->
         <div class="button-row primary-row">
-          <vbutton
-            color="blue"
-            size="s1"
-            :label="labelLeft"
-            :active="keyboard['left']"
-            ref="dom_left"
-          />
-          <vbutton
-            color="blue"
-            size="s1"
-            :label="labelRight"
-            :active="keyboard['right']"
-            ref="dom_right"
-          />
-          <vbutton
-            color="blue"
-            size="s1"
-            :label="labelDown"
-            :active="keyboard['down']"
-            ref="dom_down"
-          />
-          <vbutton
-            color="blue"
-            size="s1"
-            :label="rotation"
-            :active="keyboard['rotate']"
-            ref="dom_rotate"
-          />
-          <vbutton
-            color="blue"
-            size="s1"
-            :label="labelDropSpace"
-            :active="keyboard['drop']"
-            ref="dom_space"
-          />
+          <div class="keyboard-dpad">
+            <div class="dpad-top">
+              <vbutton
+                color="blue"
+                size="s1"
+                :label="labelLeft"
+                :active="keyboard['left']"
+                ref="dom_left"
+              />
+              <vbutton
+                color="blue"
+                size="s1"
+                :label="labelRight"
+                :active="keyboard['right']"
+                ref="dom_right"
+              />
+            </div>
+            <vbutton
+              class="dpad-down"
+              color="blue"
+              size="s1"
+              :label="labelDown"
+              :active="keyboard['down']"
+              ref="dom_down"
+            />
+          </div>
+          <div class="keyboard-action">
+            <vbutton
+              color="blue"
+              size="s1"
+              :label="rotation"
+              :active="keyboard['rotate']"
+              ref="dom_rotate"
+            />
+            <vbutton
+              color="blue"
+              size="s1"
+              :label="labelDropSpace"
+              :active="keyboard['drop']"
+              ref="dom_space"
+            />
+          </div>
         </div>
       </div>
 </template>
