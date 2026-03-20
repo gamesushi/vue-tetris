@@ -39,18 +39,10 @@ export default {
     const mouseDownEventCatch = {}
     document.addEventListener(
       'touchstart',
-      e => {
-        if (e.preventDefault) {
-          e.preventDefault()
-        }
-      },
+      () => {},
       true
     )
-    document.addEventListener('touchend', (e) => {
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
-    }, true);
+    document.addEventListener('touchend', () => {}, true);
 
     // 阻止双指放大
     document.addEventListener('gesturestart', (event) => {
