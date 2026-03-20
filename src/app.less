@@ -65,116 +65,67 @@ body {
         }
 
         &.c {
-            /* Landed Block (Karma) */
-            color: #4a4a4a;
-            /* Deep Grey */
+            /* Landed Block (Karma) - '業' */
+            color: #2c2c2c;
+            /* Almost Black Ink */
             font-weight: normal;
             font-family: 'TiePing', sans-serif !important;
-            /* Force TiePing for Karma Blocks */
+            /* Realistic Inset/Stamp effect */
+            text-shadow: 
+                -0.5px -0.5px 0px rgba(0,0,0,0.4), 
+                 0.5px  0.5px 0px rgba(255,255,255,0.2);
+            filter: grayscale(10%) contrast(110%);
         }
 
         &.active {
-            /* Falling Block (Virtue) */
-            /* color: #5d6d7e; Removed default */
+            /* Falling Block (Virtue) - '德' */
             font-weight: 900;
-            /* Bold */
             font-family: 'TiePing', 'XinHuo', sans-serif !important;
-            /* Force TiePing for Virtue Blocks */
+            /* Floating Ink effect */
+            filter: drop-shadow(1px 1.5px 1px rgba(0,0,0,0.25));
+            animation: ink-throb 3s infinite ease-in-out;
 
-
-            &.type-I {
-                color: #78b9ce;
-                /* 天青 - Sky Blue */
-            }
-
-            &.type-L {
-                color: #e98b2a;
-                /* 雄黄 - Realgar */
-            }
-
-            &.type-J {
-                color: #41555d;
-                /* 黛蓝 - Indigo */
-            }
-
-            &.type-Z {
-                color: #ff461f;
-                /* 朱砂 - Cinnabar */
-            }
-
-            &.type-S {
-                color: #789262;
-                /* 竹青 - Bamboo Green */
-            }
-
-            &.type-O {
-                color: #ffb61e;
-                /* 雌黄 - Orpiment */
-            }
-
-            &.type-T {
-                color: #4c221b;
-                /* 紫檀 - Rosewood */
-            }
-
-            /* Purple */
+            &.type-I { color: #5a9cb1; } /* Muted Sky Blue */
+            &.type-L { color: #d17a1f; } /* Realgar */
+            &.type-J { color: #32444b; } /* Indigo */
+            &.type-Z { color: #e03210; } /* Cinnabar */
+            &.type-S { color: #647b51; } /* Bamboo Green */
+            &.type-O { color: #e6a416; } /* Orpiment */
+            &.type-T { color: #3d1b16; } /* Rosewood */
         }
 
         &.ghost {
-            opacity: 0.3;
+            opacity: 0.15;
             font-weight: normal;
             font-family: 'TiePing', 'XinHuo', sans-serif !important;
+            filter: blur(0.5px);
 
-            &.type-I {
-                color: #78b9ce;
-                /* 天青 */
-            }
-
-            &.type-L {
-                color: #e98b2a;
-                /* 雄黄 */
-            }
-
-            &.type-J {
-                color: #41555d;
-                /* 黛蓝 */
-            }
-
-            &.type-Z {
-                color: #ff461f;
-                /* 朱砂 */
-            }
-
-            &.type-S {
-                color: #789262;
-                /* 竹青 */
-            }
-
-            &.type-O {
-                color: #ffb61e;
-                /* 雌黄 */
-            }
-
-            &.type-T {
-                color: #4c221b;
-                /* 紫檀 */
-            }
+            &.type-I { color: #78b9ce; }
+            &.type-L { color: #e98b2a; }
+            &.type-J { color: #41555d; }
+            &.type-Z { color: #ff461f; }
+            &.type-S { color: #789262; }
+            &.type-O { color: #ffb61e; }
+            &.type-T { color: #4c221b; }
         }
-
-        /* Purple */
 
         &.d {
             /* Highlight/Clear Block */
-            color: #805050;
-            /* Keep Cinnabar for highlight */
+            color: #f2e6d8;
+            background-color: #805050;
+            border-radius: 2px;
             font-family: 'TiePing', sans-serif !important;
-            /* Force TiePing for Flashing Blocks */
             animation: shatter-right 600ms ease-out forwards;
         }
 
         &:nth-child(odd).d {
             animation-name: shatter-left;
         }
+    }
+
+    @keyframes ink-throb {
+        0%, 100% { transform: scale(1); filter: drop-shadow(1px 1.5px 1px rgba(0,0,0,0.25)); }
+        50% { transform: scale(1.02); filter: drop-shadow(2px 3px 2px rgba(0,0,0,0.15)); }
     }
 
     @keyframes shatter-left {
@@ -238,6 +189,43 @@ body {
     background: #f2e6d8;
     /* Rice White */
 
+    .matrix {
+        border: 1px solid #c0b283;
+        padding: 0;
+        margin: 0 auto;
+        width: 402px;
+        background-color: #f7f3e9;
+        
+        /* Subtle rice paper texture */
+        background-image: 
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23dcd0c0' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H2V1z'%3E%3C/path%3E%3C/svg%3E"),
+            linear-gradient(to bottom, transparent, rgba(0,0,0,0.02));
+
+        p {
+            width: 400px;
+            height: 40px;
+            clear: both;
+        }
+
+        b {
+            width: 40px !important;
+            height: 40px !important;
+            line-height: 40px !important;
+            font-size: 34px !important;
+            border-right: 0.5px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+            font-weight: normal;
+            /* Removed transition to prevent 'Karma' ghosting during rotation */
+        }
+
+        p:last-child b {
+            border-bottom: none;
+        }
+
+        b:last-child {
+            border-right: none;
+        }
+    }
 }
 
 .rect {
@@ -317,13 +305,13 @@ body {
     .screen {
         width: 100%; // Ensure it uses full width if needed, though 390px might be enough
         height: auto; // Allow expansion
-        min-height: 850px; // Rough estimate: 440*1.5 + spacing + 42
+        min-height: 1250px; // Rough estimate: 440*1.5 + spacing + 42
         overflow: visible;
 
         .panel {
             width: 100%;
             height: auto;
-            min-height: 850px;
+            min-height: 1250px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -370,13 +358,13 @@ body {
     .screen {
         width: 100%;
         height: auto;
-        min-height: 850px;
+        min-height: 1250px;
         overflow: visible;
 
         .panel {
             width: 100%;
             height: auto;
-            min-height: 850px;
+            min-height: 1250px;
             display: block; // Reset flex from previous attempt if any, or ensures block context
             position: relative;
             padding-top: 20px;

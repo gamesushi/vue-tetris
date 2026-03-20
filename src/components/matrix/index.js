@@ -123,18 +123,14 @@ export default {
         shape.forEach((m, k1) =>
           m.forEach((n, k2) => {
             if (n && xy[0] + k1 >= 0) {
-              // 竖坐标可以为负
-              // 竖坐标可以为负
               let line = matrix[xy[0] + k1]
               let color
               // Check for overlap, ignoring ghost cells
-              let isGhost = typeof line[xy[1] + k2] === 'string' && line[xy[1] + k2].endsWith('_ghost')
-              if (line[xy[1] + k2] && !isGhost && !clearLines) {
-                // 矩阵与方块重合
-                color = 2
-              } else {
-                color = cur.type + '_active'
-              }
+              let isGhost = line[xy[1] + k2] && typeof line[xy[1] + k2] === 'string' && line[xy[1] + k2].endsWith('_ghost')
+              
+              // Always use active color for the current block's cells
+              color = cur.type + '_active'
+              
               line[xy[1] + k2] = color
               matrix[xy[0] + k1] = line
             }
