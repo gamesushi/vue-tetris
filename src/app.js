@@ -86,8 +86,9 @@ export default {
         const ratio = h / w
         let scale
         let css = {}
-        const baseHeight = this.isMobile ? 1350 : 962
-        if (ratio < 1.5) {
+        const baseHeight = this.isMobile ? 1760 : 962
+        const ratioThreshold = baseHeight / 750
+        if (ratio < ratioThreshold) {
           scale = h / baseHeight
           css = {
             'margin-top': Math.floor(-baseHeight / 2) + 'px'
