@@ -26,7 +26,7 @@ export default {
           <p>
             {p.map((e, k2) => {
               let className = ''
-              let text = '業'
+              let text = '德'
               if (e === 2) {
                 className = 'd'
               } else if (typeof e === 'string' && e.endsWith('_active')) {

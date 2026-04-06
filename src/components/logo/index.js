@@ -1,4 +1,5 @@
 import { i18n, lan } from '../../unit/const'
+import states from '../../control/states'
 let Logo = {
   timeout: null
 }
@@ -145,6 +146,9 @@ export default {
           })
         })
       })
+    },
+    start() {
+      states.start()
     }
   }
 }

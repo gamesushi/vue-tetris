@@ -1,0 +1,79 @@
+.settings-wrapper {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  
+  .settings-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.settings-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 200px;
+  background: rgba(15, 25, 35, 0.95);
+  border: 1px solid #334;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  overflow: hidden;
+  
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    border-bottom: 1px solid #334;
+    
+    .close-btn {
+      cursor: pointer;
+      font-size: 12px;
+    }
+  }
+
+  .menu-content {
+    display: flex;
+    flex-direction: column;
+    
+    .menu-item {
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      
+      &:hover, &:active {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    
+    .score-title {
+      font-weight: bold;
+      color: #ffd700;
+      cursor: default;
+      
+      &:hover, &:active {
+        background: transparent;
+      }
+    }
+  }
+}

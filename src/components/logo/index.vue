@@ -1,7 +1,7 @@
 <template>
   <div class="logo" :style="'display:'+display">
     <div class="bg dragon" :class="style" />
-    <p v-html="titleCenter" />
+    <p v-html="titleCenter" @click="start" @touchstart.prevent="start" />
   </div>
 </template>
 

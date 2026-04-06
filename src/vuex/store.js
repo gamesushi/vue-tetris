@@ -101,6 +101,11 @@ if (startLinesInitState < 0 || startLinesInitState > 10) {
 const resetInitState = lastRecord && lastRecord.reset
   ? !!lastRecord.reset
   : false
+
+const controlModeInitState = lastRecord && lastRecord.controlMode
+  ? lastRecord.controlMode
+  : 'button'
+
 const state = {
   music: musicInitState,
   pause: pauseInitState,
@@ -128,6 +133,7 @@ const state = {
   },
 
   lock: lockInitState,
+  controlMode: controlModeInitState,
   focus: isFocus()
 }
 export default new Vuex.Store({

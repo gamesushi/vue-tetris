@@ -1,5 +1,6 @@
 <template>
-  <div class="app" :class="{ 'mobile-bg': isMobile }" :style="size">
+  <div class="app" :class="{ 'mobile-bg': isMobile }" :style="size" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
+    <Settings />
     <div class="rect" :class="drop?'drop':''">
       <Decorate/>
       <div class="screen">
@@ -31,7 +32,7 @@
             </filter>
         </defs>
     </svg>
-    <Keyboard :filling='filling' v-if="isMobile" />
+    <Keyboard v-if="isMobile && controlMode === 'button'" />
     <Guide/>
     <Sutra />
   </div>

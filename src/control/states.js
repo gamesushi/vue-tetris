@@ -77,6 +77,9 @@ const states = {
     const fall = () => {
       state = store.state
       cur = state.cur
+      if (!cur) {
+        return
+      }
       const next = cur.fall()
       if (want(next, state.matrix)) {
         store.commit('moveBlock', next)

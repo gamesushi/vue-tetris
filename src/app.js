@@ -5,14 +5,17 @@ import Music from './components/music/index.vue'
 import Pause from './components/pause/index.vue'
 import Number from './components/number/index.vue'
 import Point from './components/point/index.vue'
-import Keyboard from './components/keyboard/index.vue'
+import Settings from './components/settings/index.vue'
 import Logo from './components/logo/index.vue'
 import Matrix from './components/matrix/index.vue'
 import Sutra from './components/sutra/index.vue'
+import Keyboard from './components/keyboard/index.vue'
 import { mapState } from 'vuex'
 import { transform, lastRecord, speeds, i18n, lan } from './unit/const'
 import { visibilityChangeEvent, isFocus, isMobile } from './unit/'
 import states from './control/states'
+import todo from './control/todo'
+
 export default {
   watch: {
     isMobile: {
@@ -38,7 +41,13 @@ export default {
       w: document.documentElement.clientWidth,
       h: document.documentElement.clientHeight,
       filling: '',
-      isMobile: isMobile()
+      isMobile: isMobile(),
+      touchStartX: 0,
+      touchStartY: 0,
+      touchLastX: 0,
+      isLongPress: false,
+      isSwiping: false,
+      longPressTimeout: null
     }
   },
   components: {
@@ -50,9 +59,10 @@ export default {
     Number,
     Point,
     Logo,
-    Keyboard,
+    Settings,
     Matrix,
-    Sutra
+    Sutra,
+    Keyboard
   },
   computed: {
     pContent() {
@@ -74,7 +84,8 @@ export default {
       'points',
       'max',
       'reset',
-      'drop'
+      'drop',
+      'controlMode'
     ])
   },
   methods: {
@@ -146,6 +157,78 @@ export default {
         }
       } else {
         states.overStart()
+      }
+    },
+    onTouchStart(e) {
+      if (!this.isMobile) return;
+      if (this.controlMode === 'button') return;
+      if (e.touches.length > 1) return;
+      if (this.pause) return;
+      
+      this.touchStartX = e.touches[0].clientX;
+      this.touchStartY = e.touches[0].clientY;
+      this.touchLastX = this.touchStartX;
+      this.isLongPress = false;
+      this.isSwiping = false;
+      
+      this.longPressTimeout = setTimeout(() => {
+        if (!this.isSwiping) {
+          this.isLongPress = true;
+          todo.down.down(this.$store);
+        }
+      }, 300);
+    },
+    onTouchMove(e) {
+      if (!this.isMobile || this.pause) return;
+      if (this.controlMode === 'button') return;
+      if (e.touches.length > 1) return;
+      
+      e.preventDefault(); 
+      
+      const touchCurX = e.touches[0].clientX;
+      const touchCurY = e.touches[0].clientY;
+      const deltaX = touchCurX - this.touchStartX;
+      const deltaY = touchCurY - this.touchStartY;
+      
+      if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+        if (!this.isSwiping) {
+          this.isSwiping = true;
+          clearTimeout(this.longPressTimeout);
+          if (this.isLongPress) {
+            todo.down.up(this.$store);
+            this.isLongPress = false;
+          }
+        }
+        
+        const step = 40; 
+        if (touchCurX - this.touchLastX > step) {
+          todo.right.down(this.$store); todo.right.up(this.$store);
+          this.touchLastX += step;
+        } else if (this.touchLastX - touchCurX > step) {
+          todo.left.down(this.$store); todo.left.up(this.$store);
+          this.touchLastX -= step;
+        }
+      }
+    },
+    onTouchEnd(e) {
+      if (!this.isMobile || this.pause) return;
+      if (this.controlMode === 'button') return;
+      
+      clearTimeout(this.longPressTimeout);
+      if (this.isLongPress) {
+        todo.down.up(this.$store);
+        this.isLongPress = false;
+      } else if (!this.isSwiping) {
+        todo.rotate.down(this.$store); todo.rotate.up(this.$store);
+      } else {
+        const touchCurX = e.changedTouches[0].clientX;
+        const touchCurY = e.changedTouches[0].clientY;
+        const deltaX = touchCurX - this.touchStartX;
+        const deltaY = touchCurY - this.touchStartY;
+        
+        if (deltaY > 50 && Math.abs(deltaY) > Math.abs(deltaX)) {
+          todo.space.down(this.$store); todo.space.up(this.$store);
+        }
       }
     }
   }

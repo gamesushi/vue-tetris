@@ -180,26 +180,7 @@ export default {
 </script>
 
 <style lang="less">
-/* Enforce PC Styles directly in component to ensure update */
-.sutra-container {
-    left: 655px !important;
-    top: 87px !important;
-    width: 440px !important;
-    height: 560px !important;
-    /* Optional: visible structure for debugging, remove if not needed */
-    /* border: 1px dashed rgba(0, 255, 255, 0.5); */
-}
-
-/* Mobile override must be preserved and use !important to beat the specific PC override above if needed, 
-   but media queries inside logic usually apply correctly. 
-   However, since we used !important above, we should ensure mobile still works.
+/* Styles are primarily in index.less. 
+   Only overrides or dynamic adjustments should go here if necessary.
 */
-@media (max-width: 768px) {
-    .sutra-container {
-        left: auto !important;
-        width: 170px !important;
-        height: 660px !important;
-        top: 127px !important;
-    }
-}
 </style>

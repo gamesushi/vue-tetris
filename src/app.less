@@ -300,61 +300,13 @@ body {
     }
 }
 
-// Mobile Layout Adjustments (Scale 1.5x)
+// Mobile Layout Adjustments (Unified Side-by-Side)
 .app.mobile-bg {
-    .screen {
-        width: 100%; // Ensure it uses full width if needed, though 390px might be enough
-        height: auto; // Allow expansion
-        min-height: 1250px; // Rough estimate: 440*1.5 + spacing + 42
-        overflow: visible;
-
-        .panel {
-            width: 100%;
-            height: auto;
-            min-height: 1250px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-        }
-
-        .matrix {
-            transform: scale(1.5);
-            transform-origin: top center;
-            margin-bottom: 230px; // Compensate for the scale taking up more vertical space than flow layout sees
-            z-index: 10;
-        }
-    }
-
-    .state {
-        // Move from absolute right to static flow below matrix
-        position: static;
+    .rect {
         width: 100%;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-        padding-bottom: 40px;
-
-        p {
-            text-align: center;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .bottom {
-            position: static;
-            width: auto;
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
+        padding-top: 15px; // Reduced padding
     }
-}
 
-// Mobile Layout Adjustments (Side-by-Side)
-.app.mobile-bg {
     .screen {
         width: 100%;
         height: auto;
@@ -365,53 +317,105 @@ body {
             width: 100%;
             height: auto;
             min-height: 1250px;
-            display: block; // Reset flex from previous attempt if any, or ensures block context
+            display: block; // Reset to block context
             position: relative;
-            padding-top: 20px;
+            padding: 0;
+            background: transparent !important;
         }
 
         .matrix {
-            // Game Board on Right
+            // Game Board Centered
             position: absolute;
-            top: 20px;
-            right: 15px; // Margin from right edge
-            transform: scale(1.5);
-            transform-origin: top right;
-            margin: 0; // Remove auto margins
+            top: 155px; // 下移矩阵
+            left: 50%;
+            transform: translateX(-50%) scale(1.35);
+            transform-origin: top center;
+            margin: 0;
             z-index: 10;
+        }
+    }
+
+    // Logo adjustment for mobile
+    .logo {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        margin-left: 0;
+        transform: none; // Reset PC scale
+        z-index: 20;
+
+        p {
+            top: 640px; // Matrix starts at 155px. Scaled 1.35x from top. Center is 155 + (400 * 1.35) = 695. Offset -55 for box.
         }
     }
 
     .state {
         // Info Panel on Left
-        position: absolute !important; // Override default absolute right
-        top: 20px;
-        right: auto; // Unset right
-        left: 10px; // Margin from left edge
-        width: 135px; // Keep original width basis
-
-        transform: scale(0.8); // Scale down slightly to fit
+        position: absolute !important; 
+        top: 155px;
+        left: 15px; 
+        right: auto;
+        width: 140px; 
+        z-index: 100; // Ensure info panel is above other elements
+        
+        transform: scale(0.85); 
         transform-origin: top left;
-
-        display: block; // Stack vertically as originally intended
-        margin: 0;
-        padding-bottom: 0;
+        
+        display: block;
+        margin: 0 !important; // Reset margins from PC layout
+        text-align: left;
 
         p {
-            text-align: left; // Revert to left align or keep center? Left might be better in this narrow column
-            height: 57px;
-            margin-bottom: 0;
+            text-align: left;
+            width: 38px; // 强制换行达到中文字竖排效果
+            height: auto;
+            word-wrap: break-word;
+            line-height: 1.1;
+            margin-bottom: 5px;
+            font-size: 34px;
+
+            small {
+                display: none; // 隐藏副标题以防排版凌乱
+            }
+        }
+
+        .number {
+            float: left;
+            clear: both;
+            margin-left: 0px; // 紧靠左侧
+            margin-top: 5px;
+            margin-bottom: 10px;
+
+            span.num-n {
+                display: none !important; // 移除透明占位符以便数字紧靠左侧
+            }
+        }
+
+        // 转置下个方块预览为纵向显示
+        .next {
+            display: flex !important;
+            flex-direction: row !important;
+            width: 60px !important;
+            height: 120px !important;
+            margin-top: 5px;
+            float: left; // 靠左
+
+            div {
+                width: 30px !important;
+                height: 120px !important;
+                display: flex !important;
+                flex-direction: column-reverse !important; // 右转90度映射
+                float: none !important;
+            }
         }
 
         .bottom {
             position: absolute;
-            top: 426px; // Keep original relative separation or adjust? 
-            // The originals were absolute within relative .state. 
-            // If .state scales, this scales with it.
-            // But we need to check if 'bottom' buttons (Music/Pause/Time) are part of this .state panel
-            // YES, .bottom is inside .state in HTML.
-            // So they will move with .state to the left.
-            // This clears the bottom center area for the main controls (Keyboard).
+            top: 480px; // Adjust based on stacked items height
+            left: 0;
+            display: flex;
+            gap: 15px;
         }
     }
-}
+}

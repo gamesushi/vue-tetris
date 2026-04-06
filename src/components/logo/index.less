@@ -1,23 +1,52 @@
 .logo {
-    width: 224px;
-    height: 200px;
+    width: 100%;
+    height: auto;
     position: absolute;
-    top: 100px;
-    left: 50%;
-    margin-left: -112px;
+    top: 0;
+    left: 0;
+    margin-left: 0;
     text-align: center;
-    overflow: hidden;
+    pointer-events: none; // Allow clicks through the container
 
     p {
         position: absolute;
-        width: 100%;
-        line-height: 1.4;
-        top: 100px;
-        left: 0;
+        width: 110px;
+        height: 110px;
+        line-height: 1.1; // Reduced line-height for vertical stacking
+        top: 345px; // Vertical centering based on 800px matrix height
+        left: 50%;
+        margin-left: -55px;
         font-family: 'XinHuo', serif;
-        font-size: 38px;
-        letter-spacing: 6px;
-        text-shadow: 1px 1px 1px rgba(255, 255, 255, .35);
+        font-size: 32px; // Slightly smaller to fit 4 chars
+        letter-spacing: 0;
+        color: #d32f2f;
+        border: 4px solid #d32f2f;
+        border-radius: 4px;
+        background: rgba(211, 47, 47, 0.05);
+        box-shadow: inset 0 0 8px rgba(211, 47, 47, 0.2), 0 0 5px rgba(0,0,0,0.1);
+        cursor: pointer;
+        user-select: none;
+        pointer-events: auto; // Explicitly enable clicks
+        z-index: 100; // Keep on top
+        // Apply seal roughness filter
+        filter: url(#seal-roughness);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; // Stack '游戲' over '開始'
+        text-align: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: scale(1.05);
+            background: rgba(211, 47, 47, 0.1);
+        }
+
+        &:active {
+            transform: scale(0.95);
+            background: rgba(211, 47, 47, 0.2);
+        }
     }
 
     .dragon {
